@@ -24,6 +24,7 @@ const infoAboutProgram = async(req, res) => {
   res.json(infoAboutProgram); 
 }
 
+//User story 7: get program's broadcast info
 const broadcastInfo = async(req, res) => {
   let broadcastInfo = await fetch (`http://api.sr.se/api/v2/programs/${req.params.programid}?${json}`); 
   broadcastInfo = await broadcastInfo.json(); 
