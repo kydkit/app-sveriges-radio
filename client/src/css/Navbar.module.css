@@ -1,0 +1,26 @@
+.navbar {
+  background: rgb(210, 210, 210); 
+  font-family: 'Dosis';
+  font-weight: 400;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.link {
+  padding: 10px;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: gray;
+}
