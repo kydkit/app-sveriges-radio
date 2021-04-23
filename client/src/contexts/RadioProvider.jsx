@@ -8,12 +8,15 @@ const RadioProvider = (props) => {
   const [categories, setCategories] = useState(null);
   const [programsForCat, setProgramsForCat] = useState(null); 
   const [channelSchedules, setChannelSchedules] = useState(null); 
+  const [dateSchedules, setDateSchedules] = useState(null);
+  
 
   useEffect(() => {
-    getAllChannels();
-    getAllCategories();
     // getProgramsForCategory(); take away so that categories dont load themselves
-    getChannelSchedule()
+    // getAllChannels();
+    getAllCategories();
+    getChannelSchedule();
+    getScheduleByDate(); 
   }, []);
 
   //User story 1 get all channels
@@ -50,13 +53,22 @@ const RadioProvider = (props) => {
     setProgramsForCat(programsForCategory.programs); 
   }
 
-  //210?date=2021-04-22
-   //User story 2 all broadcasts per channel per day
-  const getChannelSchedule = async (channelId, date) => {
-    let schedules = await fetch(`/api/v1/channels/schedule/210?date=2021-04-22`); 
+  
+   //User story 2 all broadcasts per channel current day
+  const getChannelSchedule = async (channelId) => {
+    let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
     schedules = await schedules.json(); 
-    console.log(schedules.schedule);
-    setChannelSchedules(schedules)
+    // console.log(schedules.schedule);
+    setChannelSchedules(schedules.schedule)
+  }
+
+  //210?date=2021-04-22
+  //User story 2 all broadcasts per channel per day
+  const getScheduleByDate = async (channelId, date) => {
+    let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/${channelId}?date=${date}`); 
+    schedulesByDate = await schedulesByDate.json(); 
+    console.log(schedulesByDate.schedule);
+    setDateSchedules(schedulesByDate.schedule); 
   }
 
   const values = {
@@ -69,8 +81,10 @@ const RadioProvider = (props) => {
     categories,
     getProgramsForCategory,
     programsForCat,
+    channelSchedules, 
+    dateSchedules,
     getChannelSchedule, 
-    channelSchedules
+    getScheduleByDate
   };
 
   return (

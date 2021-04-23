@@ -8,7 +8,7 @@ const Navbar = () => {
   // eslint-disable-next-line
   const [links, setLinks] = useState([
     {name: "CHANNELS", url: "/channels"}, 
-    {name: "PROGRAMS", url: "/programs/207"},
+    // {name: "PROGRAMS", url: "/programs"},
     {name: "CATEGORIES", url: "/categories"},
     {name: "FAVORITES", url: "/favorites"},
     {name: "LOG IN", url: "/login"}
