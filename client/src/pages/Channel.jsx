@@ -31,15 +31,26 @@ const Channel = (props) => {
   };
 
   const renderSchedules = () => {
-    if (channelSchedules) {
-      return channelSchedules.map((sched) => (
-        <div className="card" key={sched.id}>
-          <p>{sched.title}</p>
-          <em>{sched.starttimeutc}</em>
-        </div>
-      ));
+    if (!channelSchedules) {
+      return <h1>Loading...</h1>
     }
+    return channelSchedules.map((sched) => (
+      <div className="card" key={sched.id}>
+        <p>{sched.title}</p>
+        <em>{sched.starttimeutc}</em>
+      </div>
+    ));
   };
+  // const renderSchedules = () => {
+  //   if (channelSchedules) {
+  //     return channelSchedules.map((sched) => (
+  //       <div className="card" key={sched.id}>
+  //         <p>{sched.title}</p>
+  //         <em>{sched.starttimeutc}</em>
+  //       </div>
+  //     ));
+  //   }
+  // };
 
   const renderPrograms = () => {
     if (programs) {

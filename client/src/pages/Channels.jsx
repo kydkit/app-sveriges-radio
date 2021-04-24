@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { RadioContext } from "../contexts/RadioProvider"; 
 import styles from "../css/Channels.module.css"; 
-import Pagination from '../components/Pagination';
+// import Pagination from '../components/Pagination';
 
 
 const Channels = () => {
@@ -12,7 +12,6 @@ const Channels = () => {
   //pagination useStates
   // const [currentPage, setCurrentPage] = useState(1); 
   // const [postsPerPage] = useState(10); 
-
 
   useEffect(() => {
     getAllChannels();

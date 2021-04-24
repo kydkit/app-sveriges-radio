@@ -56,7 +56,8 @@ const RadioProvider = (props) => {
   
    //User story 2 all broadcasts per channel current day
   const getChannelSchedule = async (channelId) => {
-    let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
+    let schedules = await fetch(`/api/v1/channels/schedule/132`); 
+    // let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
     schedules = await schedules.json(); 
     // console.log(schedules.schedule);
     setChannelSchedules(schedules.schedule)
@@ -65,9 +66,10 @@ const RadioProvider = (props) => {
   //210?date=2021-04-22
   //User story 2 all broadcasts per channel per day
   const getScheduleByDate = async (channelId, date) => {
-    let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/${channelId}?date=${date}`); 
+    let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/132?date=2021-04-29`); 
+    // let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/${channelId}?date=${date}`); 
     schedulesByDate = await schedulesByDate.json(); 
-    console.log(schedulesByDate.schedule);
+    // console.log(schedulesByDate.schedule);
     setDateSchedules(schedulesByDate.schedule); 
   }
 
