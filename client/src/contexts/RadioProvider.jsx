@@ -9,6 +9,8 @@ const RadioProvider = (props) => {
   const [programsForCat, setProgramsForCat] = useState(null); 
   const [channelSchedules, setChannelSchedules] = useState(null); 
   const [dateSchedules, setDateSchedules] = useState(null);
+  const [ToShowTabla, setToShowTabla] = useState(true); 
+  const [channelOnPage, setChannelOnPage] = useState(null); 
   
 
   useEffect(() => {
@@ -17,6 +19,7 @@ const RadioProvider = (props) => {
     getAllCategories();
     getChannelSchedule();
     getScheduleByDate(); 
+    // getChannelById(); 
   }, []);
 
   //User story 1 get all channels
@@ -27,6 +30,14 @@ const RadioProvider = (props) => {
     // console.log(channels.channels);
     setChannels(channels.channels);
   };
+
+  //extra. Get channelById
+  const getChannelById = async (channelId) => {
+    let channelsId = await fetch (`/api/v1/channels/${channelId}`); 
+    channelsId = await channelsId.json(); 
+    console.log(channelsId);
+    setChannelOnPage(channelsId); 
+  }
 
   //User story 3 all Programs for a channel, 6. Info about program
   const getAllProgramsForChannel = async (channelId) => {
@@ -53,17 +64,17 @@ const RadioProvider = (props) => {
     setProgramsForCat(programsForCategory.programs); 
   }
 
-  
    //User story 2 all broadcasts per channel current day
   const getChannelSchedule = async (channelId) => {
-    let schedules = await fetch(`/api/v1/channels/schedule/132`); 
+    let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
     // let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
     schedules = await schedules.json(); 
+    // console.log(schedules);
     // console.log(schedules.schedule);
     setChannelSchedules(schedules.schedule)
   }
 
-  //210?date=2021-04-22
+  //210?date=2021-04-22 MUST FIX
   //User story 2 all broadcasts per channel per day
   const getScheduleByDate = async (channelId, date) => {
     let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/132?date=2021-04-29`); 
@@ -86,7 +97,11 @@ const RadioProvider = (props) => {
     channelSchedules, 
     dateSchedules,
     getChannelSchedule, 
-    getScheduleByDate
+    getScheduleByDate,
+    ToShowTabla, 
+    setToShowTabla,
+    getChannelById,
+    channelOnPage
   };
 
   return (

@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useHistory } from 'react-router-dom'; 
 
 
 import { UserContext } from '../contexts/UserContext'
@@ -8,6 +9,7 @@ const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [userId, setUserId] = useState("")
+  const history = useHistory(); 
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -28,6 +30,7 @@ const Register = (props) => {
     //ABLE TO GET REGISTER TO STORE IN DB. 
     //BUT IF USER ALREAY EXIST???
     await registerUser(newUser); 
+    // history.push("/login"); 
   };
 
   return (

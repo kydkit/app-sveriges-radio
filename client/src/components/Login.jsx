@@ -1,7 +1,9 @@
 import { useState, useContext } from 'react'; 
+import { useHistory } from 'react-router-dom'; 
 import { UserContext } from "../contexts/UserContext"
 
 const Login = (props) => {
+  const history = useHistory(); 
   const { loginUser } = useContext(UserContext); 
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState(""); 
@@ -16,12 +18,13 @@ const Login = (props) => {
   
   const handleLogIn = async (e)=> {
     e.preventDefault(); 
-    let user = {
+    let userToSave = {
       email, 
       password
     }; 
 
-    let result = await loginUser(user); 
+    await loginUser(userToSave); 
+    history.push("/"); 
   }; 
 
   return (

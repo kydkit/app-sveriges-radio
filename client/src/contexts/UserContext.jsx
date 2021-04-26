@@ -1,10 +1,10 @@
 import { createContext, useState, useEffect } from 'react'; 
-import { useHistory } from 'react-router-dom'; 
+// import { useHistory } from 'react-router-dom'; 
 
 export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
-  const history = useHistory(); 
+  // const history = useHistory(); 
   const [toBeLogin, setToBeLogin] = useState(true);
 
   useEffect(() => {
@@ -37,7 +37,6 @@ const UserContextProvider = (props) => {
     result = await result.json(); 
     if(result.success){
       console.log("success");
-      // history.push("/"); 
     } else {
       console.log("no success");
     }

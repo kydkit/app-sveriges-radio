@@ -3,11 +3,21 @@
   text-align: center;
   font-weight: 500;
 }
-
+.cardcontainer {
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
 .card {
   margin-bottom: 10px;
   /* background: rgb(240, 240, 240); */
-  /* border-bottom: solid 1px rgb(200, 200, 200); */
+  border-bottom: solid 1px rgb(200, 200, 200);
+  margin: 5px 5px;
   display: flex;
-  align-items: center;
+  width: 250px;
+}
+
+.name {
+  padding-left: 10px;
 }
