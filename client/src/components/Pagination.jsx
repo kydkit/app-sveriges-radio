@@ -1,3 +1,5 @@
+import styles from "../css/Pagination.module.css";
+
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 
@@ -5,10 +7,15 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageNumbers.push(i);
   }
   return (
-    <div>
+    <div className={styles.numbers}>
       {pageNumbers.map((number) => (
         <li key={number} className="page-item">
-          <a onClick={() => paginate(number)} href="#!" className="page-link">
+          <a
+            onClick={() => paginate(number)}
+            href="#!"
+            className={styles.pagelink}
+            style={{ color: "white" }}
+          >
             {number}
           </a>
         </li>

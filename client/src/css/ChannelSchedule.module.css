@@ -1,0 +1,45 @@
+.header {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.tocenter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.datepicker {
+  margin-bottom: 40px;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card {
+  width: 230px;
+  height: 350px;
+  overflow: hidden;
+  margin-bottom: 1.8rem;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 5px ;
+}
+
+.programName {
+  font-weight: 600;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .card {
+    padding: 0 15px;
+  }
+}

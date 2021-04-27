@@ -1,23 +1,32 @@
 .header {
-  font-family: 'Dosis';
+  font-family: "Dosis";
   text-align: center;
   font-weight: 500;
 }
+
 .cardcontainer {
-width: 100%;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
 }
+
 .card {
   margin-bottom: 10px;
-  /* background: rgb(240, 240, 240); */
   border-bottom: solid 1px rgb(200, 200, 200);
   margin: 5px 5px;
   display: flex;
-  width: 250px;
+  width: 210px;
+  /* background-color: rgb(200, 200, 200, .5); */
 }
 
 .name {
   padding-left: 10px;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .header {
+    margin-top: 50px;
+  }
 }

@@ -48,7 +48,7 @@ const Channels = () => {
     );
   }
 
-  return <div className="channelsWrapper">
+  return <div className={styles.channelsWrapper}>
     {content}
   </div>
 }

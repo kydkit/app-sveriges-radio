@@ -9,12 +9,12 @@ const RadioProvider = (props) => {
   const [programsForCat, setProgramsForCat] = useState(null);
   const [dateSchedules, setDateSchedules] = useState(null);
   const [channelOnPage, setChannelOnPage] = useState(null);
-  // const [channelSchedules, setChannelSchedules] = useState(null); 
+  // const [channelSchedules, setChannelSchedules] = useState(null);
 
   useEffect(() => {
     getAllCategories();
     getScheduleByDate();
-    // getChannelById(); 
+    // getChannelById();
   }, []);
 
   //User story 1 get all channels
@@ -30,9 +30,9 @@ const RadioProvider = (props) => {
   const getChannelById = async (channelId) => {
     let channelsId = await fetch(`/api/v1/channels/${channelId}`);
     channelsId = await channelsId.json();
-    console.log(channelsId);
-    setChannelOnPage(channelsId);
-  }
+    // console.log(channelsId.channel);
+    setChannelOnPage(channelsId.channel);
+  };
 
   //User story 3 all Programs for a channel, 6. Info about program
   const getAllProgramsForChannel = async (channelId) => {
@@ -53,30 +53,33 @@ const RadioProvider = (props) => {
 
   //5.List all programs in a certain category
   const getProgramsForCategory = async (categoryid) => {
-    let programsForCategory = await fetch(`/api/v1/programs/category/${categoryid}`);
+    let programsForCategory = await fetch(
+      `/api/v1/programs/category/${categoryid}`
+    );
     programsForCategory = await programsForCategory.json();
     // console.log(programsForCategory.programs);
     setProgramsForCat(programsForCategory.programs);
-  }
+  };
 
   //  //User story 2 all broadcasts per channel current day
   // const getChannelSchedule = async (channelId) => {
-  //   let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
-  //   // let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
-  //   schedules = await schedules.json(); 
+  //   let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`);
+  //   // let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`);
+  //   schedules = await schedules.json();
   //   // console.log(schedules);
   //   // console.log(schedules.schedule);
   //   setChannelSchedules(schedules.schedule)
   // }
 
-
   //User story 2 all broadcasts per channel per day
   const getScheduleByDate = async (channelId, startDate) => {
-    let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/${channelId}?date=${startDate}`);
+    let schedulesByDate = await fetch(
+      `/api/v1/channels/scheduledate/${channelId}?date=${startDate}`
+    );
     schedulesByDate = await schedulesByDate.json();
     // console.log(schedulesByDate.schedule);
     setDateSchedules(schedulesByDate.schedule);
-  }
+  };
 
   const values = {
     channels,
@@ -91,7 +94,7 @@ const RadioProvider = (props) => {
     dateSchedules,
     getScheduleByDate,
     getChannelById,
-    channelOnPage
+    channelOnPage,
   };
 
   return (

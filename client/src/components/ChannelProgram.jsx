@@ -1,5 +1,5 @@
 import { useEffect, useContext} from "react";
-
+import styles from '../css/ChannelProgram.module.css'
 import { RadioContext } from "../contexts/RadioProvider";
 
 const ChannelProgram = (props) => {
@@ -15,14 +15,12 @@ const ChannelProgram = (props) => {
     if (programs) {
       if (programs.length > 0) {
         return programs.map((program) => (
-          <div className="card" key={program.id}>
+          <div className={styles.card} key={program.id}>
             <img
               src={program.programimagewide}
               alt="program snips"
-              width="50"
-              height="50"
             />
-            <h3>{program.name}</h3>
+            <h3 className={styles.programName}>{program.name}</h3>
             <p>{program.broadcastinfo}</p>
             <p className="description">{program.description}</p>
           </div>
@@ -36,9 +34,12 @@ const ChannelProgram = (props) => {
   };
 
   return(
-    <div className="renderprograms">
-      <h3>All the programs for one channel</h3>
+    <div className={styles.program}>
+      <h2 className={styles.header}>Current Programs</h2>
+      <div className={styles.cardContainer}>
+
       {programs && renderPrograms()}
+      </div>
     </div>
   )
 }

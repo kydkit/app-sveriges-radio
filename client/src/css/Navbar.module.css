@@ -1,6 +1,6 @@
 .navbar {
-  background: rgb(210, 210, 210); 
-  font-family: 'Dosis';
+  background: black;
+  font-family: "Dosis";
   font-weight: 400;
   padding: 10px;
   display: flex;
@@ -13,12 +13,12 @@
 
 a:link {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 a:visited {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 a:hover {

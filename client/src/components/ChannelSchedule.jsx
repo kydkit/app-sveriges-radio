@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { RadioContext } from "../contexts/RadioProvider";
+import styles from '../css/ChannelSchedule.module.css'
 
 const ChannelSchedule = (props) => {
   const { getScheduleByDate, dateSchedules } = useContext(RadioContext);
@@ -22,22 +23,29 @@ const ChannelSchedule = (props) => {
 
   const renderScheduleByDate = () => {
       return dateSchedules.map((dateSched) => (
-        <div className="card" key={dateSched.id}>
-          <p>{dateSched.title}</p>
+        <div className={styles.card} key={dateSched.id}>
+          <img src={dateSched.imageurltemplate} alt="schedule display" />
+          <h3 className={styles.programName}>{dateSched.title}</h3>
           <strong>{dateSched.starttimeutc}</strong>
+          <p>{dateSched.description}</p>
         </div>
-      ))
+      ));
   }
 
   return (
     <div className="channelschedule">
-      <h3>2. broadcasts from one channel by day</h3>
+      <div className={styles.tocenter}>
+      <h2 className={styles.header}>Schedule By Day</h2>
       <DatePicker
+        className={styles.datepicker}
         dateFormat="yyyy-MM-dd"
         selected={startDate}
         onChange={(date) => handleDate(date)}
       />
-      {dateSchedules && renderScheduleByDate()}
+      </div>
+      <div className={styles.cardContainer}>
+        {dateSchedules && renderScheduleByDate()}
+      </div>
     </div>
   );
 }
