@@ -21,14 +21,12 @@ const ChannelSchedule = (props) => {
   }, [startDate])
 
   const renderScheduleByDate = () => {
-    if (dateSchedules) {
       return dateSchedules.map((dateSched) => (
         <div className="card" key={dateSched.id}>
           <p>{dateSched.title}</p>
           <strong>{dateSched.starttimeutc}</strong>
         </div>
       ))
-    }
   }
 
   return (

@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { UserContext } from '../contexts/UserContext'
 
 const Register = (props) => {
-  const { registerUser } = useContext(UserContext); 
+  const { registerUser, regResult, whoami } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,15 +17,23 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     let newUser = {
       email,
       password
-    }; 
-
-    //ABLE TO GET REGISTER TO STORE IN DB. 
-    //BUT IF USER ALREAY EXIST???
-    await registerUser(newUser); 
+    };
+    await whoami(newUser);
+    await registerUser(newUser);
   };
+
+  let content = "";
+  if (regResult) {
+    content = (
+      <div className="regResult">
+        {regResult}
+      </div>
+    )
+  }
 
   return (
     <div className="register">
@@ -37,6 +45,7 @@ const Register = (props) => {
           onChange={handlePassword}
         />
         <button>Register</button>
+        {content}
       </form>
     </div>
   );
