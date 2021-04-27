@@ -6,19 +6,14 @@ const RadioProvider = (props) => {
   const [channels, setChannels] = useState(null);
   const [programs, setPrograms] = useState(null);
   const [categories, setCategories] = useState(null);
-  const [programsForCat, setProgramsForCat] = useState(null); 
-  const [channelSchedules, setChannelSchedules] = useState(null); 
+  const [programsForCat, setProgramsForCat] = useState(null);
   const [dateSchedules, setDateSchedules] = useState(null);
-  const [ToShowTabla, setToShowTabla] = useState(true); 
-  const [channelOnPage, setChannelOnPage] = useState(null); 
-  
+  const [channelOnPage, setChannelOnPage] = useState(null);
+  // const [channelSchedules, setChannelSchedules] = useState(null); 
 
   useEffect(() => {
-    // getProgramsForCategory(); take away so that categories dont load themselves
-    // getAllChannels();
     getAllCategories();
-    getChannelSchedule();
-    getScheduleByDate(); 
+    getScheduleByDate();
     // getChannelById(); 
   }, []);
 
@@ -33,10 +28,10 @@ const RadioProvider = (props) => {
 
   //extra. Get channelById
   const getChannelById = async (channelId) => {
-    let channelsId = await fetch (`/api/v1/channels/${channelId}`); 
-    channelsId = await channelsId.json(); 
+    let channelsId = await fetch(`/api/v1/channels/${channelId}`);
+    channelsId = await channelsId.json();
     console.log(channelsId);
-    setChannelOnPage(channelsId); 
+    setChannelOnPage(channelsId);
   }
 
   //User story 3 all Programs for a channel, 6. Info about program
@@ -59,29 +54,28 @@ const RadioProvider = (props) => {
   //5.List all programs in a certain category
   const getProgramsForCategory = async (categoryid) => {
     let programsForCategory = await fetch(`/api/v1/programs/category/${categoryid}`);
-    programsForCategory = await programsForCategory.json(); 
+    programsForCategory = await programsForCategory.json();
     // console.log(programsForCategory.programs);
-    setProgramsForCat(programsForCategory.programs); 
+    setProgramsForCat(programsForCategory.programs);
   }
 
-   //User story 2 all broadcasts per channel current day
-  const getChannelSchedule = async (channelId) => {
-    let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
-    // let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
-    schedules = await schedules.json(); 
-    // console.log(schedules);
-    // console.log(schedules.schedule);
-    setChannelSchedules(schedules.schedule)
-  }
+  //  //User story 2 all broadcasts per channel current day
+  // const getChannelSchedule = async (channelId) => {
+  //   let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
+  //   // let schedules = await fetch(`/api/v1/channels/schedule/${channelId}`); 
+  //   schedules = await schedules.json(); 
+  //   // console.log(schedules);
+  //   // console.log(schedules.schedule);
+  //   setChannelSchedules(schedules.schedule)
+  // }
 
-  //210?date=2021-04-22 MUST FIX
+
   //User story 2 all broadcasts per channel per day
-  const getScheduleByDate = async (channelId, date) => {
-    let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/132?date=2021-04-29`); 
-    // let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/${channelId}?date=${date}`); 
-    schedulesByDate = await schedulesByDate.json(); 
+  const getScheduleByDate = async (channelId, startDate) => {
+    let schedulesByDate = await fetch(`/api/v1/channels/scheduledate/${channelId}?date=${startDate}`);
+    schedulesByDate = await schedulesByDate.json();
     // console.log(schedulesByDate.schedule);
-    setDateSchedules(schedulesByDate.schedule); 
+    setDateSchedules(schedulesByDate.schedule);
   }
 
   const values = {
@@ -90,16 +84,12 @@ const RadioProvider = (props) => {
     getAllProgramsForChannel,
     programs,
     setPrograms,
-    getAllCategories, 
+    getAllCategories,
     categories,
     getProgramsForCategory,
     programsForCat,
-    channelSchedules, 
     dateSchedules,
-    getChannelSchedule, 
     getScheduleByDate,
-    ToShowTabla, 
-    setToShowTabla,
     getChannelById,
     channelOnPage
   };

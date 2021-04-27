@@ -3,12 +3,11 @@ import { useEffect, useContext} from "react";
 import { RadioContext } from "../contexts/RadioProvider";
 
 const ChannelProgram = (props) => {
-
-  const { programs, getChannelSchedule } = useContext(RadioContext);
+  const { programs, getAllProgramsForChannel } = useContext(RadioContext);
   const  channelId  = props.channelId;
 
   useEffect(() => {
-    getChannelSchedule(channelId);
+    getAllProgramsForChannel(channelId);
     // eslint-disable-next-line
   }, []);
 
@@ -38,7 +37,7 @@ const ChannelProgram = (props) => {
 
   return(
     <div className="renderprograms">
-      <h3>3. All the programs for one channel</h3>
+      <h3>All the programs for one channel</h3>
       {programs && renderPrograms()}
     </div>
   )

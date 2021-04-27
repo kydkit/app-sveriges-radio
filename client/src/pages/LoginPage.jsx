@@ -1,13 +1,13 @@
-import { useContext } from 'react'; 
-import Login from '../components/Login' ; 
-import Register from '../components/Register'; 
+import { useContext } from 'react';
+import Login from '../components/Login';
+import Register from '../components/Register';
 
-import { UserContext } from '../contexts/UserContext'; 
+import { UserContext } from '../contexts/UserContext';
 
 const LoginPage = () => {
-  const { toBeLogin, setToBeLogin } = useContext(UserContext); 
+  const { toBeLogin, setToBeLogin } = useContext(UserContext);
   const toggle = () => {
-    setToBeLogin(!toBeLogin); 
+    setToBeLogin(!toBeLogin);
   }
 
   return (

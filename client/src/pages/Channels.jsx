@@ -4,7 +4,6 @@ import { RadioContext } from "../contexts/RadioProvider";
 import styles from "../css/Channels.module.css";
 import Pagination from '../components/Pagination';
 
-
 const Channels = () => {
   const history = useHistory();
   const { channels, getAllChannels } = useContext(RadioContext);
@@ -15,18 +14,16 @@ const Channels = () => {
 
   useEffect(() => {
     getAllChannels();
+    // eslint-disable-next-line
   }, [])
 
   const handleClick = (channelId) => {
-    console.log(channelId);
+    // console.log(channelId);
     history.push(`/programs/${channelId}`)
   }
 
-  //pagination
-
   //change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
 
   let content = "";
   if (channels) {
@@ -34,11 +31,9 @@ const Channels = () => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = channels.slice(indexOfFirstPost, indexOfLastPost);
 
-
     content = (
       <>
         <h1 className={styles.header}>CHANNELS</h1>
-        
         <div className={styles.cardcontainer}>
           {channels &&
             currentPosts.map((channel) => (
@@ -57,11 +52,5 @@ const Channels = () => {
     {content}
   </div>
 }
-
-
-
-
-
-
 
 export default Channels;

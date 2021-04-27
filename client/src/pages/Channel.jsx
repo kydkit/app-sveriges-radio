@@ -1,18 +1,16 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 
-import { RadioContext } from "../contexts/RadioProvider";
-import ChannelProgram from  '../components/ChannelProgram'; 
-import ChannelSchedule from '../components/ChannelSchedule'; 
+import ChannelProgram from '../components/ChannelProgram';
+import ChannelSchedule from '../components/ChannelSchedule';
 
 const Channel = (props) => {
-  const { getChannelById } = useContext(RadioContext); 
-  const { channelId, date } = props.match.params;
-  const [showPrograms, setShowPrograms] = useState(false); 
+  const { channelId } = props.match.params;
+  const [showPrograms, setShowPrograms] = useState(false);
 
   useEffect(() => {
-    setShowPrograms(true); 
+    setShowPrograms(true);
     // eslint-disable-next-line
-  },[])
+  }, [])
 
   const channelnav = () => {
     const handleClickPrograms = () => {
@@ -20,13 +18,13 @@ const Channel = (props) => {
     }
 
     const handleClickSchedule = () => {
-      setShowPrograms(false); 
+      setShowPrograms(false);
     }
 
-    return(
+    return (
       <div>
-        <span onClick={handleClickPrograms}>programs</span>
-        <span onClick={() => {handleClickSchedule()}}>tabla</span>
+        <p onClick={handleClickPrograms}>programs</p>
+        <p onClick={() => { handleClickSchedule() }}>schedule</p>
       </div>
     )
   }

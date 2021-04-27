@@ -2,7 +2,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import RadioProvider from "./contexts/RadioProvider";
 import UserContext from "./contexts/UserContext";
-// import Home from './pages/Home';
 import Channels from "./pages/Channels";
 import Navbar from "./components/Navbar";
 import Channel from "./pages/Channel";

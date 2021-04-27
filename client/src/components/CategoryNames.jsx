@@ -6,7 +6,6 @@ const CategoryNames = (props) => {
   const { categories, getProgramsForCategory } = useContext(RadioContext);
 
   const handleClick = (id) => {
-    // console.log((id));
     getProgramsForCategory(id);
   }
 
@@ -23,7 +22,6 @@ const CategoryNames = (props) => {
       { categories && renderCategories()}
     </div>
   )
-
 }
 
 export default CategoryNames;

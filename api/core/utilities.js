@@ -1,7 +1,7 @@
 const convertToDateObject = (SRTimeString) => {
   return new Date(
     parseInt(SRTimeString.replace(/[\/\(\)date]/gi, ""))
-  ).toLocaleString();
+  ).toLocaleString("sv-SE");
 };
 
 // See the following link to an excellent regex site: https://regex101.com/
