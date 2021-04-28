@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import styles from '../css/Login.module.css'
+
 
 const Login = (props) => {
   const history = useHistory();
@@ -35,8 +37,8 @@ const Login = (props) => {
   }
 
   return (
-    <div className="login">
-      <form onSubmit={handleLogIn}>
+    <div>
+      <form className={styles.container} onSubmit={handleLogIn}>
         <input type="text" placeholder="email" onChange={handleEmail} />
         <input
           type="password"

@@ -33,7 +33,7 @@ const Channels = () => {
 
     content = (
       <>
-        <h1 className={styles.header}>CHANNELS</h1>
+        <h1 className={styles.header}>Channels</h1>
         <div className={styles.cardcontainer}>
           {channels &&
             currentPosts.map((channel) => (

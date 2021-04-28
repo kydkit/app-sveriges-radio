@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import styles from '../css/LoginButton.module.css'
 
 const LoginButton = () => {
   const history = useHistory();
@@ -6,7 +7,7 @@ const LoginButton = () => {
   const handleOnclick = () => {
     history.push("/login");
   };
-  return <p onClick={handleOnclick}>Login</p>;
+  return <p className={styles.loginbutton} onClick={handleOnclick}>Login</p>;
 };
 
 export default LoginButton;

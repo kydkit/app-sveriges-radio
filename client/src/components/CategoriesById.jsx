@@ -10,19 +10,17 @@ const CategoriesById = (props) => {
     return programsForCat.map((program) => (
       <div className={styles.card} key={program.id}>
         <img
-          src={program.programimagewide}
+          src={program.programimagetemplatewide}
           alt="program wide"
-          width="100"
-          height="100"
         />
-        <span>{program.name}</span>
+        <h3 className={styles.programName}>{program.name}</h3>
         <p className="description">{program.description}</p>
       </div>
     ));
   };
 
   return (
-    <div className="catbyid">
+    <div className={styles.cardContainer}>
       {programsForCat && renderProgramsForCategory()}
     </div>
   );

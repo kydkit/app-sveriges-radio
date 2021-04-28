@@ -13,6 +13,6 @@
   cursor: pointer;
 }
 
-.mininav span:hover {
+.mininav p:hover {
   color: gray;
 }

@@ -1,10 +1,15 @@
 .navbar {
   background: black;
   font-family: "Dosis";
-  font-weight: 400;
+  font-weight: 600;
   padding: 10px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+
+.navbar img:hover {
+  cursor: pointer;
 }
 
 .link {

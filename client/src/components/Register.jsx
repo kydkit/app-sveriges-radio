@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 
-import { UserContext } from '../contexts/UserContext'
+import { UserContext } from '../contexts/UserContext'; 
+import styles from '../css/Register.module.css'
+
 
 const Register = (props) => {
   const { registerUser, regResult, whoami } = useContext(UserContext);
@@ -36,8 +38,8 @@ const Register = (props) => {
   }
 
   return (
-    <div className="register">
-      <form onSubmit={handleSubmit}>
+    <div>
+      <form className={styles.container} onSubmit={handleSubmit}>
         <input type="text" placeholder="email" onChange={handleEmail} />
         <input
           type="password"
