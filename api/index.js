@@ -8,6 +8,8 @@ const categoriesRoutes = require("./routes/categoriesRoutes");
 const programRoutes = require("./routes/programRoutes");  
 //userRoutes
 const userRoutes = require("./routes/userRoutes"); 
+//fav Routes
+const favoritesRoutes = require("./routes/favoritesRoutes"); 
 
 //server setup
 const app = express(); 
@@ -32,6 +34,8 @@ app.use("/api/v1/categories", categoriesRoutes);
 app.use("/api/v1/programs", programRoutes); 
 //user routes setup
 app.use("/api/v1/users", userRoutes); 
+//fav routes setup
+app.use("/api/v1/favorites", favoritesRoutes); 
 
 // Serve static files, makes the frontend files "available" to the backend
 app.use(express.static(path.join(__dirname, "../build")));

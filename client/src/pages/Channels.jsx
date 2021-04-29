@@ -8,8 +8,8 @@ import { UserContext } from '../contexts/UserContext';
 const Channels = () => {
   const history = useHistory();
   const { channels, getAllChannels } = useContext(RadioContext);
-  const { user } = useContext(UserContext); 
-  const [liked, setLiked] = useState(true); 
+  const { user, storeFav } = useContext(UserContext); 
+  const [liked, setLiked] = useState(false); 
 
   // pagination useStates
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +26,13 @@ const Channels = () => {
   }
 
   const toggleLike = (channelId) => {
-    setLiked(!liked); 
+    setLiked(liked); 
+    if(liked){
+      let favToSave = {
+        channelId
+      }
+      storeFav(favToSave); 
+    }
     console.log(liked);
     console.log(channelId);
   }
@@ -63,14 +69,29 @@ const Channels = () => {
                 {/* heart visibility based on log in status */}
                 <div>
                   {user ? (
-                    <img className={styles.heart} src="../assets/heart-stroke.svg" alt="heart icon" />
+                    <img
+                      className={styles.heart}
+                      src="../assets/heart-stroke.svg"
+                      alt="heart icon"
+                    />
                   ) : (
                     ""
                   )}
                 </div>
 
                 {/* heart option between liked or not */}
-              
+                {/* <div onClick={() => toggleLike(channel.id)}>
+                  <p>heart</p>
+                </div> */}
+                {/* <div onClick={()=> toggleLike(channel.id)}>
+                  {liked ? (
+                    <img className={styles.heart} src="../assets/heart-stroke.svg" alt="heart icon"
+                    />
+                  ) : (
+                    <img className={styles.heart} src="../assets/heart-solid.svg" alt="heart icon"
+                    />
+                  )}
+                </div> */}
               </div>
             ))}
         </div>

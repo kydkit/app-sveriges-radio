@@ -6,6 +6,8 @@ const UserContextProvider = (props) => {
   const [user, setUser] = useState(null);
   const [regResult, setRegResult] = useState(null);
   const [loginResult, setLoginResult] = useState(null);
+  const [userFavChannel, setUserFavChannel] = useState(null);
+  
   //use to toggle register or login
   const [toBeLogin, setToBeLogin] = useState(true);
 
@@ -71,6 +73,38 @@ const UserContextProvider = (props) => {
     // }
   };
 
+
+  // Functionality for favorites //
+  const storeFavChannel = async (favToSave) => {
+    let fav = await fetch("/api/v1/favorites/savefavchannel", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(favToSave),
+    });
+    fav = await fav.json(); 
+    console.log(fav);
+  }
+
+  const storeFavProgram = async (favToSave) =>{
+    let fav = await fetch("/api/v1/favorites/savefavprogram", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(favToSave),
+    });
+    fav = await fav.json(); 
+    console.log(fav);
+  }
+
+  const getUserFavChannel = async (userId) => {
+    let fav = await fetch(`/api/v1/favorites/getfavchannel/${userId}`); 
+    fav = await fav.json(); 
+    setUserFavChannel(fav); 
+  }
+
   const values = {
     whoami,
     toBeLogin,
@@ -82,7 +116,9 @@ const UserContextProvider = (props) => {
     setRegResult,
     loginResult,
     setUser,
-    user
+    user, 
+    storeFavChannel, 
+    getUserFavChannel
   };
 
   return (

@@ -6,8 +6,13 @@ import styles from '../css/Register.module.css'
 
 const Register = (props) => {
   const { registerUser, regResult, whoami } = useContext(UserContext);
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+  };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -21,6 +26,7 @@ const Register = (props) => {
     e.preventDefault();
 
     let newUser = {
+      username, 
       email,
       password
     };
@@ -40,6 +46,7 @@ const Register = (props) => {
   return (
     <div>
       <form className={styles.container} onSubmit={handleSubmit}>
+        <input type="text" placeholder="username" onChange={handleUsername} />
         <input type="text" placeholder="email" onChange={handleEmail} />
         <input
           type="password"
