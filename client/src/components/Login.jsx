@@ -1,14 +1,11 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import styles from '../css/Login.module.css'
-
+import styles from "../css/Login.module.css";
 
 const Login = (props) => {
   const history = useHistory();
-  const { loginUser, whoami, user, loginState, loginResult } = useContext(
-    UserContext
-  );
+  const { loginUser, loginResult, user } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,17 +17,16 @@ const Login = (props) => {
     setPassword(e.target.value);
   };
 
-  const handleLogIn = async (e) => {
+  const handleLogIn = (e) => {
     e.preventDefault();
     let userToSave = {
       email,
       password,
     };
-    await loginUser(userToSave);
-    await whoami(userToSave);
+    loginUser(userToSave);
   };
   let content = "";
-  if (loginState) {
+  if (user) {
     history.push("/");
   } else {
     content = <div className="noLogin">{loginResult}</div>;

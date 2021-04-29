@@ -7,6 +7,7 @@ const db = new sqlite3.Database(path.join(__dirname, "../../radio.db"));
 //Route handles
 const whoami = (req, res) => {
   //if user exists we get back user. if not we get null
+  // console.log("who am i from backend: ", req.session.user);
   res.json(req.session.user || null);
 };
 
@@ -18,7 +19,7 @@ const login = (req, res) => {
 
   db.get(query, params, (err, userInDB) => {
     if (!userInDB) {
-      res.status(401).json({ error: "Bad credentials" });
+      res.status(400).json({ error: "Bad credentials" });
       return;
     }
     userToLogin.password = Encrypt.encrypt(userToLogin.password);
@@ -28,7 +29,7 @@ const login = (req, res) => {
       res.json({ success: "Login successful", loggedInUser: userInDB });
       return;
     } else {
-      res.status(401).json({ error: "Bad credentials" });
+      res.status(400).json({ error: "Bad credentials" });
       return;
     }
   });

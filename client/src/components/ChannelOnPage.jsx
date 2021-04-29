@@ -8,6 +8,7 @@ const ChannelOnPage = (props) => {
 
   useEffect(() => {
     getChannelById(channelId);
+    // eslint-disable-next-line
   }, []);
 
   const renderIcon = () => {

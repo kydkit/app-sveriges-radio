@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import LoginButton from '../components/LoginButton';
 import LogoutButton from '../components/LogoutButton'
@@ -7,7 +7,7 @@ import { UserContext } from '../contexts/UserContext';
 import styles from "../css/Navbar.module.css";
 
 const Navbar = () => {
-  const { loginState } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   // const [links] = useState([
   //   { name: "CHANNELS", url: "/channels" },
   //   { name: "CATEGORIES", url: "/categories" },
@@ -27,9 +27,9 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       {/* {renderLinks()} */}
-      <a href="/">
+      <Link className={styles.link} to="/">
         <img src="assets/radio.svg" alt="radio icon" width="30px" />
-      </a>
+      </Link>
       <Link className={styles.link} to="/channels">
         Channels
       </Link>
@@ -39,7 +39,7 @@ const Navbar = () => {
       <Link className={styles.link} to="/favorites">
         Favorites
       </Link>
-      {loginState ? <LogoutButton /> : <LoginButton />}
+      {user ? <LogoutButton user={user}/> : <LoginButton />}
     </div>
   );
 };

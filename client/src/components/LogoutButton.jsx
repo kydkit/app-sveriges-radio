@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
-const LogoutButton = () => {
+const LogoutButton = (props) => {
   const history = useHistory();
-  const { setLoginState, setUser, setRegResult } = useContext(UserContext);
+  const { setUser, setRegResult, logout } = useContext(UserContext);
 
-  const handleOnclick = () => {
-    setLoginState(false);
-    setUser(undefined);
+  const handleOnclick =  () => {
+    logout(props); 
+    setUser(null);
     setRegResult(null);
     history.push("/login");
   };

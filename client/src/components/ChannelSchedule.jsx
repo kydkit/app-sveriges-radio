@@ -3,10 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { RadioContext } from "../contexts/RadioProvider";
+import { UserContext } from "../contexts/UserContext";
 import styles from '../css/ChannelSchedule.module.css'
 
 const ChannelSchedule = (props) => {
-  const { getScheduleByDate, dateSchedules } = useContext(RadioContext);
+  const { getScheduleByDate, dateSchedules} = useContext(RadioContext);
+  const { user } = useContext(UserContext)
   const channelId = props.channelId;
   const [startDate, setStartDate] = useState(new Date());
 
@@ -18,6 +20,7 @@ const ChannelSchedule = (props) => {
     const formattedDate = startDate.toLocaleDateString("sv-SE");
     // console.log(formattedDate);
     getScheduleByDate(channelId, formattedDate);
+    console.log(user);
     // eslint-disable-next-line
   }, [startDate])
 

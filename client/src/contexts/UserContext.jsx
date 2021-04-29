@@ -3,20 +3,23 @@ import { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(null);
   const [regResult, setRegResult] = useState(null);
   const [loginResult, setLoginResult] = useState(null);
-  const [loginState, setLoginState] = useState(false);
   //use to toggle register or login
   const [toBeLogin, setToBeLogin] = useState(true);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    whoami()
+  }, []);
 
-  const whoami = async (user) => {
+  const whoami = async () => {
     let loggedInUser = await fetch("/api/v1/users/whoami");
     loggedInUser = await loggedInUser.json();
-    if (!loggedInUser) return;
-    setUser(loggedInUser);
+    if (loggedInUser){
+      setUser(loggedInUser);
+    }
+    console.log("who am i", loggedInUser);
   };
 
   const registerUser = async (newUser) => {
@@ -46,9 +49,13 @@ const UserContextProvider = (props) => {
       body: JSON.stringify(user),
     });
     userToLogin = await userToLogin.json();
+    // console.log(userToLogin);
+    // setUser(userToLogin)
+    
     if (userToLogin.success) {
+      // console.log(userToLogin.success);
       setUser(userToLogin);
-      setLoginState(true);
+      console.log("logged in user: ", user);
       setLoginResult(null);
     } else if (userToLogin.error) {
       console.log(loginResult);
@@ -56,8 +63,12 @@ const UserContextProvider = (props) => {
     }
   };
 
-  const logout = async () => {
-    await fetch("/api/v1/users/logout");
+  const logout = async (user) => {
+    let result = await fetch("/api/v1/users/logout");
+    // console.log(result.status);
+    // if(result.status === 200){
+    //   console.log("logout success")
+    // }
   };
 
   const values = {
@@ -69,10 +80,9 @@ const UserContextProvider = (props) => {
     logout,
     regResult,
     setRegResult,
-    loginState,
-    setLoginState,
     loginResult,
     setUser,
+    user
   };
 
   return (

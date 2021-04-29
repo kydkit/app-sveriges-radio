@@ -6,7 +6,7 @@ import ChannelOnPage from "../components/ChannelOnPage";
 import styles from '../css/ChannelPage.module.css'; 
 
 const Channel = (props) => {
-  const { channelId, channelOnPage } = props.match.params;
+  const { channelId } = props.match.params;
   const [showPrograms, setShowPrograms] = useState(false);
 
   useEffect(() => {
