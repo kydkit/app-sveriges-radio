@@ -7,21 +7,23 @@ const UserContextProvider = (props) => {
   const [regResult, setRegResult] = useState(null);
   const [loginResult, setLoginResult] = useState(null);
   const [userFavChannel, setUserFavChannel] = useState(null);
+  const [userFavProgram, setUserFavProgram] = useState(null); 
   
+
   //use to toggle register or login
   const [toBeLogin, setToBeLogin] = useState(true);
 
   useEffect(() => {
-    whoami()
+    whoami();
   }, []);
 
   const whoami = async () => {
     let loggedInUser = await fetch("/api/v1/users/whoami");
     loggedInUser = await loggedInUser.json();
-    if (loggedInUser){
+    if (loggedInUser) {
       setUser(loggedInUser);
     }
-    console.log("who am i", loggedInUser);
+    // console.log("who am i", loggedInUser);
   };
 
   const registerUser = async (newUser) => {
@@ -53,7 +55,7 @@ const UserContextProvider = (props) => {
     userToLogin = await userToLogin.json();
     // console.log(userToLogin);
     // setUser(userToLogin)
-    
+
     if (userToLogin.success) {
       // console.log(userToLogin.success);
       setUser(userToLogin);
@@ -66,13 +68,12 @@ const UserContextProvider = (props) => {
   };
 
   const logout = async (user) => {
-    let result = await fetch("/api/v1/users/logout");
+    await fetch("/api/v1/users/logout");
     // console.log(result.status);
     // if(result.status === 200){
     //   console.log("logout success")
     // }
   };
-
 
   // Functionality for favorites //
   const storeFavChannel = async (favToSave) => {
@@ -83,11 +84,11 @@ const UserContextProvider = (props) => {
       },
       body: JSON.stringify(favToSave),
     });
-    fav = await fav.json(); 
+    fav = await fav.json();
     console.log(fav);
-  }
+  };
 
-  const storeFavProgram = async (favToSave) =>{
+  const storeFavProgram = async (favToSave) => {
     let fav = await fetch("/api/v1/favorites/savefavprogram", {
       method: "POST",
       headers: {
@@ -95,14 +96,31 @@ const UserContextProvider = (props) => {
       },
       body: JSON.stringify(favToSave),
     });
-    fav = await fav.json(); 
+    fav = await fav.json();
     console.log(fav);
-  }
+  };
 
   const getUserFavChannel = async (userId) => {
-    let fav = await fetch(`/api/v1/favorites/getfavchannel/${userId}`); 
+    let fav = await fetch(`/api/v1/favorites/getfavchannel/${userId}`);
+    fav = await fav.json();
+    setUserFavChannel(fav);
+    // console.log(userFavChannel);
+  };
+
+  const getUserFavProgram = async (userId) => {
+    let fav = await fetch(`/api/v1/favorites/getfavprogram/${userId}`); 
     fav = await fav.json(); 
-    setUserFavChannel(fav); 
+    setUserFavProgram(fav); 
+    console.log(userFavProgram);
+  }
+
+  const deleteFavChannel = async (channelId) => {
+    await fetch(`/api/v1/favorites/deletefavchannel/${channelId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
   }
 
   const values = {
@@ -116,9 +134,14 @@ const UserContextProvider = (props) => {
     setRegResult,
     loginResult,
     setUser,
-    user, 
-    storeFavChannel, 
-    getUserFavChannel
+    user,
+    storeFavChannel,
+    storeFavProgram,
+    getUserFavChannel,
+    userFavProgram,
+    getUserFavProgram,
+    userFavChannel,
+    deleteFavChannel
   };
 
   return (

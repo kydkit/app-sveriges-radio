@@ -13,13 +13,12 @@ const db = new sqlite3.Database(path.join(__dirname, "../../radio.db"));
 const saveFavChannel = (req, res) => {
   let favChannel = req.body;
   let query = /*sql*/ `
-  INSERT INTO favChannel(channelId, channelName, userId)
-  VALUES ($channelId, $channelName, $userId)
+  INSERT INTO favChannel(channelId, userId)
+  VALUES ($channelId, $userId)
   `;
   let params = {
     $channelId: favChannel.channelId,
-    $channelName: favChannel.channelName,
-    $userId: favChannel.userId,
+    $userId: req.session.user.userId
   };
   db.run(query, params, function (err) {
     if (err) {
@@ -34,13 +33,13 @@ const saveFavChannel = (req, res) => {
 const saveFavProgram = (req, res) => {
   let favProgram = req.body;
   let query = /*sql*/ `
-  INSERT INTO favProgram(programId, programName, userId)
-  VALUES ($programId, $programName, $userId)
+  INSERT INTO favProgram(programId)
+  VALUES ($programId)
   `;
   let params = {
     $programId: favProgram.programId,
-    $programName: favProgram.programName,
-    $userId: favProgram.userId,
+    // $programName: favProgram.programName,
+    // $userId: favProgram.userId,
   };
   db.run(query, params, function (err) {
     if (err) {
@@ -87,9 +86,23 @@ const getFavProgram = (req, res) => {
   });
 };
 
+// DELETE from db
+// const deleteFavChannel = (req, res) => {
+//   console.log(req.params);
+//   console.log(req.body.userId);
+//   let query = `DELETE FROM favChannel WHERE channelId = $channelId AND userId = $userId` ; 
+//   let params = {
+//     $channelId: req.params.channelId,
+//     $userId: req.body.userId
+//   };
+//   db.run(query, params); 
+//   res.send("Channel has been deleted")
+// }
+
 module.exports = {
   saveFavChannel,
   saveFavProgram,
   getFavChannel,
   getFavProgram,
+  // deleteFavChannel
 };

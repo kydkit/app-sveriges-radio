@@ -16,3 +16,36 @@
 .mininav p:hover {
   color: gray;
 }
+
+.heartContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.heartText {
+  visibility: hidden;
+  width: 120px;
+
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  top: 30px;
+  left: -45px;
+}
+
+.heartContainer:hover .heartText {
+  visibility: visible;
+}
+
+
+.heart {
+  width: 30px; 
+  cursor: pointer;
+  padding-right: 30px;
+}
+
+/* .heart:hover {
+  background-color: red;
+} */

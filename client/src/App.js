@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Channel from "./pages/Channel";
 import Categories from "./pages/Categories";
 import Login from "./pages/LoginPage";
+import Favorites from "./pages/FavoritesPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route exact path="/channels" component={Channels} />
             <Route exact path="/programs/:channelId" component={Channel} />
             <Route exact path="/categories" component={Categories} />
+            <Route exact path="/favorites" component={Favorites} />
             <Route exact path="/login" component={Login} />
           </BrowserRouter>
         </UserContext>

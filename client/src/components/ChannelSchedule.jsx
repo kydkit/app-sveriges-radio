@@ -20,7 +20,7 @@ const ChannelSchedule = (props) => {
     const formattedDate = startDate.toLocaleDateString("sv-SE");
     // console.log(formattedDate);
     getScheduleByDate(channelId, formattedDate);
-    console.log(user);
+    // console.log(user);
     // eslint-disable-next-line
   }, [startDate])
 
