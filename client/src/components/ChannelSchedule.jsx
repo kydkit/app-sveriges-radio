@@ -1,14 +1,13 @@
 import { useEffect, useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ChannelScheduleCard from "../components/ChannelScheduleCard"; 
 
 import { RadioContext } from "../contexts/RadioProvider";
-import { UserContext } from "../contexts/UserContext";
 import styles from '../css/ChannelSchedule.module.css'
 
 const ChannelSchedule = (props) => {
   const { getScheduleByDate, dateSchedules} = useContext(RadioContext);
-  const { user } = useContext(UserContext)
   const channelId = props.channelId;
   const [startDate, setStartDate] = useState(new Date());
 
@@ -18,22 +17,10 @@ const ChannelSchedule = (props) => {
 
   useEffect(() => {
     const formattedDate = startDate.toLocaleDateString("sv-SE");
-    // console.log(formattedDate);
     getScheduleByDate(channelId, formattedDate);
     // console.log(user);
     // eslint-disable-next-line
   }, [startDate])
-
-  const renderScheduleByDate = () => {
-      return dateSchedules.map((dateSched) => (
-        <div className={styles.card} key={dateSched.id}>
-          <img src={dateSched.imageurltemplate} alt="schedule display" />
-          <h3 className={styles.programName}>{dateSched.title}</h3>
-          <strong>{dateSched.starttimeutc}</strong>
-          <p>{dateSched.description}</p>
-        </div>
-      ));
-  }
 
   return (
     <div className="channelschedule">
@@ -47,7 +34,9 @@ const ChannelSchedule = (props) => {
       />
       </div>
       <div className={styles.cardContainer}>
-        {dateSchedules && renderScheduleByDate()}
+      {dateSchedules && dateSchedules.map((dateSched, i) => (
+        <ChannelScheduleCard dateSched={dateSched} key={i} />
+      ))}
       </div>
     </div>
   );

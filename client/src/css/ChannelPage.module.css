@@ -39,13 +39,9 @@
   visibility: visible;
 }
 
-
 .heart {
   width: 30px; 
   cursor: pointer;
   padding-right: 30px;
 }
 
-/* .heart:hover {
-  background-color: red;
-} */

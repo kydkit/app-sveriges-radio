@@ -10,18 +10,21 @@ const FavLoggedIn = () => {
   );
   const { channels, getAllChannels } = useContext(RadioContext);
   const userId = user.userId;
-  const username = user.username;
   const [filteredFavChannels, setFilteredFavChannels] = useState(null);
 
   useEffect(() => {
     whoami();
-    getAllChannels();
+    getAllChannels(); 
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     getUserFavChannel(userId);
     if (channels && userFavChannel) {
       filterChannels();
     }
     // eslint-disable-next-line
-  }, []);
+  }, [user])
 
   const filterChannels = () => {
     const favChannelIds = userFavChannel.map((fc) => fc.channelId);
@@ -34,9 +37,6 @@ const FavLoggedIn = () => {
 
   return (
     <div className={styles.loggedinContainer}>
-      <div>
-        <p>Hello {username}!</p>
-      </div>
       <ChannelCard channels={filteredFavChannels} />
     </div>
   );

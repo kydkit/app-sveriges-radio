@@ -75,6 +75,8 @@ const UserContextProvider = (props) => {
     // }
   };
 
+  
+
   // Functionality for favorites //
   const storeFavChannel = async (favToSave) => {
     let fav = await fetch("/api/v1/favorites/savefavchannel", {
@@ -114,13 +116,14 @@ const UserContextProvider = (props) => {
     console.log(userFavProgram);
   }
 
-  const deleteFavChannel = async (channelId) => {
-    await fetch(`/api/v1/favorites/deletefavchannel/${channelId}`, {
+  const deleteFavChannel = async (channelId, userId) => {
+    await fetch(`/api/v1/favorites/deletefavchannel/${channelId}/${userId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
-      },
-    })
+      }
+    }); 
+    getUserFavChannel(userId); 
   }
 
   const values = {

@@ -12,25 +12,25 @@ const Channel = (props) => {
   const [showPrograms, setShowPrograms] = useState(false);
   const [favorite, setFavorite] = useState(true);
 
+  // const userId = user.userId;
+
   useEffect(() => {
     setShowPrograms(true);
     // eslint-disable-next-line
   }, []);
 
-  const toggleLike = async (channelId) => {
+  const toggleChannelLike = (channelId, userId) => {
     console.log(channelId);
-    if(favorite){
+    if (favorite) {
       setFavorite(!favorite);
-    let favToSave = {
-      channelId,
-    };
-    await storeFavChannel(favToSave);
-    } 
-    else if(!favorite){
-      setFavorite(true); 
-      // await deleteFavChannel(channelId)
+      let favToSave = {
+        channelId,
+      };
+      storeFavChannel(favToSave);
+    } else if (!favorite) {
+      setFavorite(true);
+      // await deleteFavChannel(channelId, userId)
     }
-    
   };
 
   const channelnav = () => {
@@ -60,7 +60,10 @@ const Channel = (props) => {
     <div className="allprograms">
       <div className={styles.mininav}>
         {/* heart visibility based on log in status */}
-        <div onClick={() => toggleLike(channelId)} className={styles.heartContainer}>
+        <div
+          onClick={() => toggleChannelLike(channelId)}
+          className={styles.heartContainer}
+        >
           <span className={styles.heartText}>Löv it!</span>
           {user ? (
             favorite ? (

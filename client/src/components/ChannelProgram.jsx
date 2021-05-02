@@ -1,17 +1,27 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import styles from "../css/ChannelProgram.module.css";
 import { RadioContext } from "../contexts/RadioProvider";
 import { UserContext } from "../contexts/UserContext";
 
 const ChannelProgram = (props) => {
   const { programs, getAllProgramsForChannel } = useContext(RadioContext);
-  const { user } = useContext(UserContext); 
+  const { user, storeFavProgram, whoami } = useContext(UserContext);
   const channelId = props.channelId;
+  const [favorite, setFavorite] = useState();
 
   useEffect(() => {
+    whoami(); 
     getAllProgramsForChannel(channelId);
     // eslint-disable-next-line
   }, []);
+
+  const handleProgramLike = (programId) => {
+    console.log(programId);
+    let favToSave = {
+      programId,
+    };
+    storeFavProgram(favToSave)
+  };
 
   const renderPrograms = () => {
     if (programs) {
@@ -23,19 +33,17 @@ const ChannelProgram = (props) => {
               src={program.programimagewide}
               alt="program snips"
             />
-            {user ? (
-              <img
-                className={styles.heart}
-                src="../assets/heart-stroke.svg"
-                alt="heart icon"
-              />
-            ) : (
-              ""
-            )}
-
+            <img
+              className={user ? styles.hearton : styles.heartoff}
+              src="../assets/heart-stroke.svg"
+              alt="heart icon"
+              onClick={() => handleProgramLike(program.id)}
+            />
             <h3 className={styles.programName}>{program.name}</h3>
-            <p>{program.broadcastinfo}</p>
-            <p className="description">{program.description}</p>
+            {/* <p>{program.broadcastinfo}</p> */}
+            <p className="description">
+              {program.description.slice(0, 70) + `...`}
+            </p>
           </div>
         ));
       } else {

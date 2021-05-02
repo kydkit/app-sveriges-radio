@@ -20,9 +20,23 @@
   margin-bottom: 1.8rem;
 }
 
-.heart {
+.hearton {
   padding-top: 10px;
-  width: 15px;
+  padding-right: 30px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.heartoff {
+  visibility: hidden;
+  padding-top: 10px;
+  padding-right: 30px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.heart:hover {
+  width: 22px
 }
 
 .image {
@@ -33,6 +47,7 @@
 .programName {
   font-weight: 600;
 }
+
 
 @media only screen and (min-device-width: 768px) {
   .card {
