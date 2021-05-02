@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import styles from "../css/ChannelProgram.module.css";
 import { RadioContext } from "../contexts/RadioProvider";
 import { UserContext } from "../contexts/UserContext";
@@ -6,7 +6,7 @@ import ChannelProgramCard from "../components/ChannelProgramCard";
 
 const ChannelProgram = (props) => {
   const { programs, getAllProgramsForChannel } = useContext(RadioContext);
-  const { user, storeFavProgram, whoami } = useContext(UserContext);
+  const { whoami } = useContext(UserContext);
   const channelId = props.channelId;
 
   useEffect(() => {
@@ -18,8 +18,8 @@ const ChannelProgram = (props) => {
   const renderPrograms = () => {
     if (programs) {
       if (programs.length > 0) {
-        return programs.map((program) => (
-          <ChannelProgramCard program={program} />
+        return programs.map((program, i) => (
+          <ChannelProgramCard program={program} key={i}/>
         ));
       } else {
         return (

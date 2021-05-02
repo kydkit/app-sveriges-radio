@@ -35,8 +35,9 @@ const Login = (props) => {
   return (
     <div>
       <form className={styles.container} onSubmit={handleLogIn}>
-        <input type="text" placeholder="email" onChange={handleEmail} />
+        <input className={styles.input} type="text" placeholder="email" onChange={handleEmail} />
         <input
+          className={styles.input}
           type="password"
           placeholder="password"
           onChange={handlePassword}

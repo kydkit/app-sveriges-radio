@@ -19,7 +19,7 @@ const Channel = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  const toggleChannelLike = (channelId, userId) => {
+  const toggleChannelLike = (channelId) => {
     console.log(channelId);
     if (favorite) {
       setFavorite(!favorite);
@@ -29,7 +29,7 @@ const Channel = (props) => {
       storeFavChannel(favToSave);
     } else if (!favorite) {
       setFavorite(true);
-      // await deleteFavChannel(channelId, userId)
+      deleteFavChannel(channelId, user.userId)
     }
   };
 

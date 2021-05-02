@@ -7,8 +7,9 @@ const UserContextProvider = (props) => {
   const [regResult, setRegResult] = useState(null);
   const [loginResult, setLoginResult] = useState(null);
   const [userFavChannel, setUserFavChannel] = useState(null);
-  const [userFavProgram, setUserFavProgram] = useState(null); 
-  
+  const [userFavProgram, setUserFavProgram] = useState(null);
+  const [editNameResult, setEditNameResult] = useState(null); 
+
 
   //use to toggle register or login
   const [toBeLogin, setToBeLogin] = useState(true);
@@ -17,6 +18,7 @@ const UserContextProvider = (props) => {
     whoami();
   }, []);
 
+  //Functionalities for users
   const whoami = async () => {
     let loggedInUser = await fetch("/api/v1/users/whoami");
     loggedInUser = await loggedInUser.json();
@@ -75,7 +77,24 @@ const UserContextProvider = (props) => {
     // }
   };
 
-  
+  const changeName = async (newUsername) => {
+    console.log(newUsername);
+    let newName = await fetch(`/api/v1/users/changename`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newUsername)
+    }); 
+    newName = await newName.json(); 
+
+    if(newName.success){
+      setEditNameResult(newName.success); 
+    } else if (newName.error){
+      setEditNameResult(newName.error); 
+    }
+  }
+
 
   // Functionality for favorites //
   const storeFavChannel = async (favToSave) => {
@@ -110,9 +129,9 @@ const UserContextProvider = (props) => {
   };
 
   const getUserFavProgram = async (userId) => {
-    let fav = await fetch(`/api/v1/favorites/getfavprogram/${userId}`); 
-    fav = await fav.json(); 
-    setUserFavProgram(fav); 
+    let fav = await fetch(`/api/v1/favorites/getfavprogram/${userId}`);
+    fav = await fav.json();
+    setUserFavProgram(fav);
     console.log(userFavProgram);
   }
 
@@ -122,8 +141,18 @@ const UserContextProvider = (props) => {
       headers: {
         "content-type": "application/json",
       }
-    }); 
-    getUserFavChannel(userId); 
+    });
+    getUserFavChannel(userId);
+  }
+
+  const deleteFavProgram = async (channelId, userId) => {
+    let programToDelete = await fetch(`/api/v1/favorites/deletefavprogram/${channelId}/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      }
+    });
+    // getUserFavProgram(userId);
   }
 
   const values = {
@@ -138,13 +167,16 @@ const UserContextProvider = (props) => {
     loginResult,
     setUser,
     user,
+    changeName, 
+    editNameResult,
     storeFavChannel,
     storeFavProgram,
     getUserFavChannel,
     userFavProgram,
     getUserFavProgram,
     userFavChannel,
-    deleteFavChannel
+    deleteFavChannel,
+    deleteFavProgram
   };
 
   return (

@@ -27,7 +27,7 @@ const ChannelSchedule = (props) => {
       <div className={styles.tocenter}>
       <h2 className={styles.header}>Schedule By Day</h2>
       <DatePicker
-        className={styles.datepicker}
+        className={styles.input}
         dateFormat="yyyy-MM-dd"
         selected={startDate}
         onChange={(date) => handleDate(date)}

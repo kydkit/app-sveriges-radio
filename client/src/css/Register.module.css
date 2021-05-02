@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-input {
+.input {
   border: 0; 
   outline: 0;
   background: transparent;
