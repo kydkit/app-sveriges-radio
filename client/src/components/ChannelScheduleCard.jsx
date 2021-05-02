@@ -1,10 +1,10 @@
 import styles from "../css/ChannelScheduleCard.module.css";
 
-const ChannelScheduleCard = ({ dateSched, i }) => {
-  const { imageurltemplate, title, starttimeutc, description } = dateSched
+const ChannelScheduleCard = ({ dateSched }) => {
+  const { imageurltemplate, title, starttimeutc, description, id } = dateSched
 
   return (
-    <div className={styles.card} key={i}>
+    <div className={styles.card} key={id}>
       <img src={imageurltemplate} alt="schedule display" />
       <h3 className={styles.programName}>{title}</h3>
       <strong>{starttimeutc}</strong>
