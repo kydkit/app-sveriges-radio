@@ -1,0 +1,29 @@
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 30px;
+}
+
+.card {
+  width: 230px;
+  height: 350px;
+  overflow: hidden;
+  margin-bottom: 1.8rem;
+}
+.card img {
+  width: 100%;
+  border-radius: 5px ;
+}
+
+.programName {
+  font-weight: 600;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .card {
+    padding: 0 15px;
+  }
+}

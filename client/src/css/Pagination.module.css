@@ -1,0 +1,33 @@
+.numbers {
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  justify-content: center;
+}
+
+li {
+  list-style-type: none;
+  padding: 0 20px;
+  margin-top: 20px;
+  /* cursor: pointer; */
+}
+
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  .numbers {
+    margin-top: 20px;
+  }
+}
+
+/* laptop */
+@media only screen 
+  and (min-device-width: 1024px) {
+    .numbers {
+      margin-top: 30px ;
+    }
+}

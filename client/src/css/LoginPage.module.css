@@ -1,0 +1,27 @@
+.loginpage {
+  display: flex;
+  flex-direction: column;
+  /* width: 300px; */
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  font-family: "Dosis";
+  text-align: center;
+  font-weight: 500;
+}
+
+.toggleRegLogin {
+  cursor: pointer;
+}
+
+.toggleRegLogin:hover {
+  color: gray;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .header {
+    margin-top: 50px;
+  }
+}

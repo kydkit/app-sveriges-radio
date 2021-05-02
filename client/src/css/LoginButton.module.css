@@ -1,0 +1,7 @@
+.loginbutton {
+  cursor: pointer;
+}
+
+.loginbutton:hover {
+  color: gray;
+}
