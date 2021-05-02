@@ -18,7 +18,6 @@ const ChannelCard = ({ channels }) => {
   }, []);
 
   const handleClick = (channelId) => {
-    // console.log(channelId);
     history.push(`/programs/${channelId}`);
   };
 

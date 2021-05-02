@@ -9,7 +9,6 @@
 .card {
   display: flex;
   flex-direction: row;
-  position: relative;
 }
 
 .logoandname {
@@ -17,9 +16,22 @@
   border-bottom: solid 1px rgb(200, 200, 200);
   margin: 5px 5px;
   display: flex;
+  flex-direction: row;
   width: 210px;
   cursor: pointer;
 }
+
+.namecontainer {
+  position: relative;
+}
+
+.delete {
+  /* position: absolute; */
+  bottom: -12px;
+  left: 170px;
+  z-index: 2;
+}
+
 
 .card:hover {
   color: gray;

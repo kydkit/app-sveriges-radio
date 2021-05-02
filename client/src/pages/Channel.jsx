@@ -5,10 +5,12 @@ import ChannelSchedule from "../components/ChannelSchedule";
 import ChannelOnPage from "../components/ChannelOnPage";
 import styles from "../css/ChannelPage.module.css";
 import { UserContext } from "../contexts/UserContext";
+import { FavoritesContext } from "../contexts/FavoritesContext";
 
 const Channel = (props) => {
   const { channelId } = props.match.params;
-  const { user, storeFavChannel, deleteFavChannel } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { storeFavChannel, deleteFavChannel } = useContext(FavoritesContext)
   const [showPrograms, setShowPrograms] = useState(false);
   const [favorite, setFavorite] = useState(true);
 

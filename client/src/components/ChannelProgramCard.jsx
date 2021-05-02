@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
+import { FavoritesContext } from "../contexts/FavoritesContext";
 import { UserContext } from "../contexts/UserContext";
 import styles from "../css/ChannelProgramCard.module.css";
 
 const ChannelProgramCard = ({ program, i }) => {
   const { id, programimagewide, name, description } = program;
-  const { user, storeFavProgram, deleteFavProgram } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { storeFavProgram, deleteFavProgram } = useContext(FavoritesContext)
   const [favorite, setFavorite] = useState(false); 
 
   const handleProgramLike = (programId) => {

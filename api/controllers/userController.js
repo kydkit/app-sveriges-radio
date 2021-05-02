@@ -76,5 +76,31 @@ const register = (req, res) => {
   });
 };
 
+const changename = (req, res) => {
+  // console.log(req.body);
+  const { username, userId } = req.body;
+
+  let newInfo = {
+    username: username,
+    userId: userId,
+  }
+
+  let query = /*sql*/ `UPDATE users SET username = $username WHERE userId = $userId`; 
+  let params = {
+    $username: req.body.username,
+    $userId: req.body.userId
+  };
+  db.run(query, params, function(err) {
+    //in order to update name on front end, session has to be updated with new info
+    req.session.user = newInfo;
+    // console.log(req.session.user);
+    if(err) {
+      res.status(400).json({ error: err }); 
+      return; 
+    }
+    res.json({ success: "Username has been updated", changes: this.changes }); 
+  })
+}
+
 //Export the different route handlers
-module.exports = { whoami, login, logout, register };
+module.exports = { whoami, login, logout, register, changename };

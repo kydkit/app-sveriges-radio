@@ -2,6 +2,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import RadioProvider from "./contexts/RadioProvider";
 import UserContext from "./contexts/UserContext";
+import FavoritesContext from "./contexts/FavoritesContext";
 import Channels from "./pages/Channels";
 import Navbar from "./components/Navbar";
 import Channel from "./pages/Channel";
@@ -14,15 +15,17 @@ const App = () => {
     <div className="App">
       <RadioProvider>
         <UserContext>
-          <BrowserRouter>
-            <Navbar />
-            <Route exact path="/" component={Channels} />
-            <Route exact path="/channels" component={Channels} />
-            <Route exact path="/programs/:channelId" component={Channel} />
-            <Route exact path="/categories" component={Categories} />
-            <Route exact path="/favorites" component={Favorites} />
-            <Route exact path="/login" component={Login} />
-          </BrowserRouter>
+          <FavoritesContext>
+            <BrowserRouter>
+              <Navbar />
+              <Route exact path="/" component={Channels} />
+              <Route exact path="/channels" component={Channels} />
+              <Route exact path="/programs/:channelId" component={Channel} />
+              <Route exact path="/categories" component={Categories} />
+              <Route exact path="/favorites" component={Favorites} />
+              <Route exact path="/login" component={Login} />
+            </BrowserRouter>
+          </FavoritesContext>
         </UserContext>
       </RadioProvider>
     </div>

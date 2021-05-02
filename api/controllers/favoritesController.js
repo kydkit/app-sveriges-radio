@@ -6,9 +6,6 @@ const fetch = require("node-fetch");
 const path = require("path");
 const db = new sqlite3.Database(path.join(__dirname, "../../radio.db"));
 
-// const json = "format=json";
-// const paginationFalse = "pagination=false";
-
 //User story 9: able to see favorite channel
 const saveFavChannel = (req, res) => {
   let favChannel = req.body;
@@ -31,15 +28,15 @@ const saveFavChannel = (req, res) => {
 
 //User story 9: able to see favorite program
 const saveFavProgram = (req, res) => {
-  let favProgram = req.body;
+  // console.log(req.body);
+  let { programId } = req.body;
   let query = /*sql*/ `
-  INSERT INTO favProgram(programId)
-  VALUES ($programId)
+  INSERT INTO favProgram(programId, userId)
+  VALUES ($programId, $userId)
   `;
   let params = {
-    $programId: favProgram.programId,
-    // $programName: favProgram.programName,
-    // $userId: favProgram.userId,
+    $programId: programId,
+    $userId: req.session.user.userId
   };
   db.run(query, params, function (err) {
     if (err) {
@@ -87,22 +84,35 @@ const getFavProgram = (req, res) => {
 };
 
 // DELETE from db
-// const deleteFavChannel = (req, res) => {
-//   console.log(req.params);
-//   console.log(req.body.userId);
-//   let query = `DELETE FROM favChannel WHERE channelId = $channelId AND userId = $userId` ; 
-//   let params = {
-//     $channelId: req.params.channelId,
-//     $userId: req.body.userId
-//   };
-//   db.run(query, params); 
-//   res.send("Channel has been deleted")
-// }
+const deleteFavChannel = (req, res) => {
+  const { channelId, userId } = req.params; 
+  // console.log(userId);
+  let query = `DELETE FROM favChannel WHERE channelId = $channelId AND userId = $userId` ; 
+  let params = {
+    $channelId: channelId,
+    $userId: userId
+  };
+  db.run(query, params); 
+  res.send("Channel has been deleted"); 
+}
+
+const deleteFavProgram = (req, res) => {
+  const { programId, userId } = req.params; 
+  // console.log(userId);
+  let query = `DELETE FROM favProgram WHERE programId = $programId AND userId = $userId` ; 
+  let params = {
+    $programId: programId,
+    $userId: userId
+  };
+  db.run(query, params); 
+  res.send("program has been deleted"); 
+}
 
 module.exports = {
   saveFavChannel,
   saveFavProgram,
   getFavChannel,
   getFavProgram,
-  // deleteFavChannel
+  deleteFavChannel,
+  deleteFavProgram
 };
