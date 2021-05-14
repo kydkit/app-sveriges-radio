@@ -17,7 +17,7 @@ const FavoritesContextProvider = (props) => {
       body: JSON.stringify(favToSave),
     });
     fav = await fav.json();
-    console.log(fav);
+    // console.log(fav);
   };
 
   const storeFavProgram = async (favToSave) => {
@@ -29,7 +29,7 @@ const FavoritesContextProvider = (props) => {
       body: JSON.stringify(favToSave),
     });
     fav = await fav.json();
-    console.log(fav);
+    // console.log(fav);
   };
 
   const getUserFavChannel = async () => {

@@ -10,7 +10,7 @@ const ChannelProgramCard = ({ program, i }) => {
   const [favorite, setFavorite] = useState(false); 
 
   const handleProgramLike = (programId) => {
-    console.log(programId);
+    // console.log(programId);
     if(!favorite){
       setFavorite(true); 
       let favToSave = {

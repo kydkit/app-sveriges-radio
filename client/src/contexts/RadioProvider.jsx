@@ -10,7 +10,6 @@ const RadioProvider = (props) => {
   const [dateSchedules, setDateSchedules] = useState(null);
   const [channelOnPage, setChannelOnPage] = useState(null);
   const [allPrograms, setAllPrograms] = useState(null); 
-  // const [channelSchedules, setChannelSchedules] = useState(null);
 
   useEffect(() => {
     getAllCategories();

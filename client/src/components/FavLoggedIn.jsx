@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/FavLoggedIn.module.css";
-import channelStyles from "../css/FavChannelCard.module.css"; 
+import channelStyles from "../css/FavChannelCard.module.css";
 import { UserContext } from "../contexts/UserContext";
 import { RadioContext } from "../contexts/RadioProvider";
-import ChannelCard from "../components/ChannelCard";
-// import ChannelProgramCard from "../components/ChannelProgramCard";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 
 const FavLoggedIn = () => {
@@ -15,45 +13,36 @@ const FavLoggedIn = () => {
     getUserFavProgram,
     userFavProgram,
     deleteFavProgram,
-    deleteFavChannel
+    deleteFavChannel,
   } = useContext(FavoritesContext);
-  const { channels, programs, getAllChannels, getAllProgramsForChannel, allPrograms, getAllPrograms } = useContext(RadioContext); /*getAllChannels*/
+  const { channels, getAllChannels, allPrograms } = useContext(RadioContext);
   const userId = user.userId;
   const [filteredFavChannels, setFilteredFavChannels] = useState(null);
   const [filteredFavPrograms, setFilteredFavPrograms] = useState(null);
-  
+
   useEffect(() => {
     if (user) {
-      // console.log(user);
       getUserFavChannel();
-      getUserFavProgram(); 
-      console.log(userFavProgram);
+      getUserFavProgram();
     }
     // eslint-disable-next-line
   }, [user]);
 
   useEffect(() => {
     whoami();
-    // console.log(allPrograms);
     getAllChannels();
-    // getAllProgramsForChannel();
     // eslint-disable-next-line
   }, []);
 
- 
-
   useEffect(() => {
     if (channels && userFavChannel) {
-      console.log("all channnels here");
       filterChannels();
     }
-    // getAllPrograms();
     if (allPrograms && userFavProgram) {
-      console.log("all here");
       filterPrograms();
     }
     // eslint-disable-next-line
-  }, [userFavProgram, userFavChannel]); /* userFavChannel*/
+  }, [userFavProgram, userFavChannel]);
 
   const filterChannels = () => {
     const favChannelIds = userFavChannel.map((fc) => fc.channelId);
@@ -81,29 +70,32 @@ const FavLoggedIn = () => {
     deleteFavProgram(programId, userId);
   };
 
-  let favChannels = ""; 
+  let favChannels = "";
   if (filteredFavChannels) {
     favChannels = (
       <div className={channelStyles.cardcontainer}>
-          {channels &&
-            filteredFavChannels.map((channel, i) => (
-              <div className={channelStyles.card} key={i}>
-                <p className={channelStyles.delete} onClick={() => deleteFromFavChannel(channel.id)}>x</p>
-                <div
-                  className={channelStyles.logoandname}
-                >
-                  <img
-                    src={channel.image}
-                    alt="channel logo"
-                    width="25"
-                    height="25"
-                  />
-                  <span className={channelStyles.name}>{channel.name}</span>
-                </div>
+        {channels &&
+          filteredFavChannels.map((channel, i) => (
+            <div className={channelStyles.card} key={i}>
+              <p
+                className={channelStyles.delete}
+                onClick={() => deleteFromFavChannel(channel.id)}
+              >
+                x
+              </p>
+              <div className={channelStyles.logoandname}>
+                <img
+                  src={channel.image}
+                  alt="channel logo"
+                  width="25"
+                  height="25"
+                />
+                <span className={channelStyles.name}>{channel.name}</span>
               </div>
-            ))}
-        </div>
-    )
+            </div>
+          ))}
+      </div>
+    );
   }
 
   let favPrograms = "";
@@ -111,20 +103,18 @@ const FavLoggedIn = () => {
     favPrograms = (
       <>
         <div className={styles.cardContainer}>
-          {
-            filteredFavPrograms.map((program, i) => (
-              <div className={styles.card} key={i}>
-                <p onClick={() => deleteFromFavProgram(program.id)}>X</p>
-                <img
-                  className={styles.image}
-                  src={program.programimagewide}
-                  alt="program snips"
-                />
-                <h3 className={styles.programName}>{program.name}</h3>
-                <p>{program.description.slice(0, 70) + `...`}</p>
-              </div>
-              // <ChannelProgramCard program={program} />
-            ))}
+          {filteredFavPrograms.map((program, i) => (
+            <div className={styles.card} key={i}>
+              <p onClick={() => deleteFromFavProgram(program.id)}>X</p>
+              <img
+                className={styles.image}
+                src={program.programimagewide}
+                alt="program snips"
+              />
+              <h3 className={styles.programName}>{program.name}</h3>
+              <p>{program.description.slice(0, 70) + `...`}</p>
+            </div>
+          ))}
         </div>
       </>
     );
