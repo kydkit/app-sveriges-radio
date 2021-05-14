@@ -44,6 +44,7 @@ const FavLoggedIn = () => {
 
   useEffect(() => {
     if (channels && userFavChannel) {
+      console.log("all channnels here");
       filterChannels();
     }
     // getAllPrograms();

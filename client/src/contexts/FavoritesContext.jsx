@@ -35,7 +35,7 @@ const FavoritesContextProvider = (props) => {
   const getUserFavChannel = async () => {
     let fav = await fetch(`/api/v1/favorites/getfavchannel`);
     fav = await fav.json();
-    console.log(userFavChannel);
+    // console.log(userFavChannel);
     setUserFavChannel(fav);
   };
 
