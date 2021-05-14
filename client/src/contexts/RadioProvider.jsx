@@ -9,12 +9,13 @@ const RadioProvider = (props) => {
   const [programsForCat, setProgramsForCat] = useState(null);
   const [dateSchedules, setDateSchedules] = useState(null);
   const [channelOnPage, setChannelOnPage] = useState(null);
+  const [allPrograms, setAllPrograms] = useState(null); 
   // const [channelSchedules, setChannelSchedules] = useState(null);
 
   useEffect(() => {
     getAllCategories();
     getScheduleByDate();
-    // getChannelById();
+    getAllPrograms(); 
   }, []);
 
   //User story 1 get all channels
@@ -24,6 +25,14 @@ const RadioProvider = (props) => {
     // console.log(channels);
     // console.log(channels.channels);
     setChannels(channels.channels);
+  };
+
+  const getAllPrograms = async () => {
+    let fetchAllPrograms = await fetch(`/api/v1/programs/getallprograms`);
+    fetchAllPrograms = await fetchAllPrograms.json();
+
+    setAllPrograms(fetchAllPrograms.programs);
+    // console.log(allPrograms);
   };
 
   //extra. Get channelById
@@ -95,6 +104,8 @@ const RadioProvider = (props) => {
     getScheduleByDate,
     getChannelById,
     channelOnPage,
+    allPrograms, 
+    getAllPrograms
   };
 
   return (
