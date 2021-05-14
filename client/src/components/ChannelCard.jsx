@@ -12,10 +12,10 @@ const ChannelCard = ({ channels }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
 
-  // useEffect(() => {
-  //   getAllChannels();
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    getAllChannels();
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = (channelId) => {
     history.push(`/programs/${channelId}`);

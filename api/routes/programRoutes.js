@@ -8,6 +8,6 @@ router.get("/:channelId", programController.getProgramsForChannel);
 router.get("/category/:categoryid", programController.getProgramsForCategory); 
 router.get("/info/:programid", programController.infoAboutProgram);
 router.get("/info/broadcastInfo/:programid", programController.broadcastInfo);
-router.get("", programController.getAllPrograms); 
+router.get("/getallprograms", programController.getAllPrograms); 
 
 module.exports = router; 

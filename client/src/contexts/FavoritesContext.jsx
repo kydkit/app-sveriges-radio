@@ -42,8 +42,8 @@ const FavoritesContextProvider = (props) => {
   const getUserFavProgram = async () => {
     let fav = await fetch(`/api/v1/favorites/getfavprogram`);
     fav = await fav.json();
-    console.log(userFavProgram);
     setUserFavProgram(fav);
+    // console.log(userFavProgram);
   };
 
   const deleteFavChannel = async (channelId, userId) => {

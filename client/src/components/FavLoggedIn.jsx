@@ -17,35 +17,42 @@ const FavLoggedIn = () => {
     deleteFavProgram,
     deleteFavChannel
   } = useContext(FavoritesContext);
-  const { channels, programs, getAllChannels} = useContext(RadioContext); /*getAllChannels*/
+  const { channels, programs, getAllChannels, getAllProgramsForChannel, allPrograms, getAllPrograms } = useContext(RadioContext); /*getAllChannels*/
   const userId = user.userId;
   const [filteredFavChannels, setFilteredFavChannels] = useState(null);
   const [filteredFavPrograms, setFilteredFavPrograms] = useState(null);
-
-  useEffect(() => {
-    whoami();
-    getAllChannels();
-    // eslint-disable-next-line
-  }, []);
-
+  
   useEffect(() => {
     if (user) {
       // console.log(user);
-      getUserFavChannel(userId);
-      // getUserFavProgram(userId);
+      getUserFavChannel();
+      getUserFavProgram(); 
+      console.log(userFavProgram);
     }
     // eslint-disable-next-line
   }, [user]);
 
   useEffect(() => {
-    // if (programs && userFavProgram) {
-    //   filterPrograms();
-    // }
+    whoami();
+    // console.log(allPrograms);
+    getAllChannels();
+    // getAllProgramsForChannel();
+    // eslint-disable-next-line
+  }, []);
+
+ 
+
+  useEffect(() => {
     if (channels && userFavChannel) {
       filterChannels();
     }
+    // getAllPrograms();
+    if (allPrograms && userFavProgram) {
+      console.log("all here");
+      filterPrograms();
+    }
     // eslint-disable-next-line
-  }, [userFavProgram, userFavChannel]);
+  }, [userFavProgram]); /* userFavChannel*/
 
   const filterChannels = () => {
     const favChannelIds = userFavChannel.map((fc) => fc.channelId);
@@ -58,7 +65,7 @@ const FavLoggedIn = () => {
 
   const filterPrograms = () => {
     const favProgramIds = userFavProgram.map((fp) => fp.programId);
-    const filteredFavs = programs.filter((program) =>
+    const filteredFavs = allPrograms.filter((program) =>
       favProgramIds.includes(program.id)
     );
     // console.log(filteredFavs);
@@ -66,16 +73,12 @@ const FavLoggedIn = () => {
   };
 
   const deleteFromFavChannel = (channelId) => {
-    console.log("im clicked");
     deleteFavChannel(channelId, userId);
   };
 
   const deleteFromFavProgram = (programId) => {
-    console.log("im clicked");
     deleteFavProgram(programId, userId);
-    // getUserFavProgram(userId);
   };
-
 
   let favChannels = ""; 
   if (filteredFavChannels) {
@@ -107,7 +110,7 @@ const FavLoggedIn = () => {
     favPrograms = (
       <>
         <div className={styles.cardContainer}>
-          {programs &&
+          {
             filteredFavPrograms.map((program, i) => (
               <div className={styles.card} key={i}>
                 <p onClick={() => deleteFromFavProgram(program.id)}>X</p>

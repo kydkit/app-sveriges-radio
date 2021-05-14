@@ -15,7 +15,7 @@ const RadioProvider = (props) => {
   useEffect(() => {
     getAllCategories();
     getScheduleByDate();
-    // getChannelById();
+    getAllPrograms(); 
   }, []);
 
   //User story 1 get all channels
@@ -25,6 +25,14 @@ const RadioProvider = (props) => {
     // console.log(channels);
     // console.log(channels.channels);
     setChannels(channels.channels);
+  };
+
+  const getAllPrograms = async () => {
+    let fetchAllPrograms = await fetch(`/api/v1/programs/getallprograms`);
+    fetchAllPrograms = await fetchAllPrograms.json();
+
+    setAllPrograms(fetchAllPrograms.programs);
+    // console.log(allPrograms);
   };
 
   //extra. Get channelById
@@ -80,14 +88,6 @@ const RadioProvider = (props) => {
     schedulesByDate = await schedulesByDate.json();
     // console.log(schedulesByDate.schedule);
     setDateSchedules(schedulesByDate.schedule);
-  };
-
-  const getAllPrograms = async () => {
-    let fetchAllPrograms = await fetch(`/api/v1/programs/getallprograms`);
-    fetchAllPrograms = await fetchAllPrograms.json();
-
-    setAllPrograms(fetchAllPrograms.programs);
-    // console.log(allPrograms);
   };
 
   const values = {
