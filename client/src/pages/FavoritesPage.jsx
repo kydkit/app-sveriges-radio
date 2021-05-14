@@ -1,27 +1,30 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react"; /*useEffect*/
 
 import FavLoggedIn from "../components/FavLoggedIn";
 import FavNotLoggedIn from "../components/FavNotLoggedIn";
 import { UserContext } from "../contexts/UserContext";
-import { RadioContext } from "../contexts/RadioProvider";
-import { FavoritesContext } from "../contexts/FavoritesContext";
+// import { RadioContext } from "../contexts/RadioProvider";
+// import { FavoritesContext } from "../contexts/FavoritesContext";
 import styles from "../css/FavoritesPage.module.css";
 
 const Favorites = () => {
   const { user, changeName, whoami } = useContext(UserContext);
 
-  const { getUserFavChannel, userFavChannel } = useContext(FavoritesContext);
-  const { getAllChannels, channels } = useContext(RadioContext);
+  // const { getUserFavChannel, userFavChannel, getUserFavProgram,userFavProgram } = useContext(FavoritesContext);
+  // const { getAllChannels, channels, programs } = useContext(RadioContext);
   const [showForm, setShowForm] = useState(false);
   const [newUsername, setNewUsername] = useState("");
 
-  useEffect(() => {
-    if (channels && userFavChannel) {
-      getAllChannels();
-      getUserFavChannel();
-    }
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   if (channels && userFavChannel) {
+  //     getAllChannels();
+  //     getUserFavChannel();
+  //   }
+  //   if(programs && userFavProgram) {
+  //     getUserFavProgram();
+  //   }
+  //   // eslint-disable-next-line
+  // }, []);
 
   const toggleEdit = () => {
     setShowForm(true);
@@ -71,7 +74,7 @@ const Favorites = () => {
         ) : (
           ""
         )}
-        
+
       </h1>
       <div className={styles.logincontainer}>
         {user ? <FavLoggedIn /> : <FavNotLoggedIn />}

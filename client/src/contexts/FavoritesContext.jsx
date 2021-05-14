@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
-
+import { createContext, useState, useEffect } from "react";
 export const FavoritesContext = createContext();
 
 const FavoritesContextProvider = (props) => {
   const [userFavChannel, setUserFavChannel] = useState(null);
   const [userFavProgram, setUserFavProgram] = useState(null);
+
+ 
 
   // Functionality for favorites //
   const storeFavChannel = async (favToSave) => {
@@ -31,18 +32,18 @@ const FavoritesContextProvider = (props) => {
     console.log(fav);
   };
 
-  const getUserFavChannel = async (userId) => {
-    let fav = await fetch(`/api/v1/favorites/getfavchannel/${userId}`);
+  const getUserFavChannel = async () => {
+    let fav = await fetch(`/api/v1/favorites/getfavchannel`);
     fav = await fav.json();
+    console.log(userFavChannel);
     setUserFavChannel(fav);
-    // console.log(userFavChannel);
   };
 
-  const getUserFavProgram = async (userId) => {
-    let fav = await fetch(`/api/v1/favorites/getfavprogram/${userId}`);
+  const getUserFavProgram = async () => {
+    let fav = await fetch(`/api/v1/favorites/getfavprogram`);
     fav = await fav.json();
+    console.log(userFavProgram);
     setUserFavProgram(fav);
-    // console.log(userFavProgram);
   };
 
   const deleteFavChannel = async (channelId, userId) => {
@@ -55,17 +56,14 @@ const FavoritesContextProvider = (props) => {
     getUserFavChannel(userId);
   };
 
-  const deleteFavProgram = async (channelId, userId) => {
-    let programToDelete = await fetch(
-      `/api/v1/favorites/deletefavprogram/${channelId}/${userId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-    // getUserFavProgram(userId);
+  const deleteFavProgram = async (programId, userId) => {
+    await fetch(`/api/v1/favorites/deletefavprogram/${programId}/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    getUserFavProgram(userId);
   };
 
   const values = {

@@ -31,9 +31,16 @@ const broadcastInfo = async(req, res) => {
   res.json(broadcastInfo.program.broadcastinfo); 
 }
 
+const getAllPrograms = async (req, res) => {
+  let fetchAllPrograms = await fetch(`http://api.sr.se/api/v2/programs?${json}`); 
+  fetchAllPrograms = await fetchAllPrograms.json(); 
+  res.json(fetchAllPrograms.programs); 
+}
+
 module.exports = {
   getProgramsForChannel,
   getProgramsForCategory,
   infoAboutProgram,
-  broadcastInfo
+  broadcastInfo,
+  getAllPrograms
 }
