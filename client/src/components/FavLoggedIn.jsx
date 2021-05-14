@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import styles from "../css/FavLoggedIn.module.css";
-import channelStyles from "../css/FavChannelCard.module.css";
 import { UserContext } from "../contexts/UserContext";
 import { RadioContext } from "../contexts/RadioProvider";
 import { FavoritesContext } from "../contexts/FavoritesContext";
+
+import styles from "../css/FavLoggedIn.module.css";
+import channelStyles from "../css/FavChannelCard.module.css";
+import t from "../css/Trash.module.css";
 
 const FavLoggedIn = () => {
   const { user, whoami } = useContext(UserContext);
@@ -77,12 +79,12 @@ const FavLoggedIn = () => {
         {channels &&
           filteredFavChannels.map((channel, i) => (
             <div className={channelStyles.card} key={i}>
-              <p
-                className={channelStyles.delete}
-                onClick={() => deleteFromFavChannel(channel.id)}
-              >
-                x
-              </p>
+              <img
+              onClick={() => deleteFromFavChannel(channel.id)}
+                className={t.channelTrash}
+                src="../assets/trash-solid.svg"
+                alt="trash icon"
+              />
               <div className={channelStyles.logoandname}>
                 <img
                   src={channel.image}
@@ -105,11 +107,16 @@ const FavLoggedIn = () => {
         <div className={styles.cardContainer}>
           {filteredFavPrograms.map((program, i) => (
             <div className={styles.card} key={i}>
-              <p onClick={() => deleteFromFavProgram(program.id)}>X</p>
               <img
                 className={styles.image}
                 src={program.programimagewide}
                 alt="program snips"
+              />
+              <img
+              onClick={() => deleteFromFavProgram(program.id)}
+                className={t.trash}
+                src="../assets/trash-solid.svg"
+                alt="trash icon"
               />
               <h3 className={styles.programName}>{program.name}</h3>
               <p>{program.description.slice(0, 70) + `...`}</p>
