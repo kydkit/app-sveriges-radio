@@ -22,7 +22,6 @@ const RadioProvider = (props) => {
   const getAllChannels = async () => {
     let channels = await fetch("/api/v1/channels");
     channels = await channels.json();
-    // console.log(channels);
     // console.log(channels.channels);
     setChannels(channels.channels);
   };
@@ -47,7 +46,6 @@ const RadioProvider = (props) => {
   const getAllProgramsForChannel = async (channelId) => {
     let allPrograms = await fetch(`/api/v1/programs/${channelId}`);
     allPrograms = await allPrograms.json();
-    // console.log(allPrograms);
     // console.log(allPrograms.programs);
     setPrograms(allPrograms.programs);
   };

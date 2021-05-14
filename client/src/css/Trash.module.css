@@ -1,0 +1,22 @@
+.channelTrash {
+  width: 12px;
+  margin-top: 15px;
+  position: absolute;
+  right: 20px;
+  bottom: 14px;
+  z-index: 3;
+}
+
+.trash {
+  width: 12px;
+  margin-top: 15px;
+}
+
+.channelTrash:hover,
+.trash:hover {
+  cursor: pointer;
+}
+
+/* .trash:hover {
+  cursor: pointer;
+} */

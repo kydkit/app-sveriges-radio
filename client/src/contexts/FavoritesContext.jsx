@@ -5,8 +5,6 @@ const FavoritesContextProvider = (props) => {
   const [userFavChannel, setUserFavChannel] = useState(null);
   const [userFavProgram, setUserFavProgram] = useState(null);
 
- 
-
   // Functionality for favorites //
   const storeFavChannel = async (favToSave) => {
     let fav = await fetch("/api/v1/favorites/savefavchannel", {
