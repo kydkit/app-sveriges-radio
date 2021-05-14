@@ -53,7 +53,7 @@ const getFavChannel = (req, res) => {
   let query = /*sql*/ `
   SELECT * FROM favChannel WHERE userId = $userId
   `;
-  let params = { $userId: req.params.userId };
+  let params = { $userId: req.session.user.userId };
   //get() gets the first match in the DB.
   //all() gets all
   //must use get all to get all the channels
@@ -73,7 +73,7 @@ const getFavProgram = (req, res) => {
   let query = /*sql*/ `
   SELECT * FROM favProgram WHERE userId = $userId
   `;
-  let params = { $userId: req.params.userId };
+  let params = { $userId: req.session.user.userId  };
   db.all(query, params, (err, favProgram) => {
     if (!favProgram) {
       res.status(400).json({ error: "Something went wrong" });

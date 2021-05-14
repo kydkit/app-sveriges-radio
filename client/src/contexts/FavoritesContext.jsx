@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-
 export const FavoritesContext = createContext();
 
 const FavoritesContextProvider = (props) => {
@@ -31,15 +30,15 @@ const FavoritesContextProvider = (props) => {
     console.log(fav);
   };
 
-  const getUserFavChannel = async (userId) => {
-    let fav = await fetch(`/api/v1/favorites/getfavchannel/${userId}`);
+  const getUserFavChannel = async () => {
+    let fav = await fetch(`/api/v1/favorites/getfavchannel`);
     fav = await fav.json();
-    setUserFavChannel(fav);
     // console.log(userFavChannel);
+    setUserFavChannel(fav);
   };
 
-  const getUserFavProgram = async (userId) => {
-    let fav = await fetch(`/api/v1/favorites/getfavprogram/${userId}`);
+  const getUserFavProgram = async () => {
+    let fav = await fetch(`/api/v1/favorites/getfavprogram`);
     fav = await fav.json();
     setUserFavProgram(fav);
     // console.log(userFavProgram);
@@ -55,17 +54,14 @@ const FavoritesContextProvider = (props) => {
     getUserFavChannel(userId);
   };
 
-  const deleteFavProgram = async (channelId, userId) => {
-    let programToDelete = await fetch(
-      `/api/v1/favorites/deletefavprogram/${channelId}/${userId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-    // getUserFavProgram(userId);
+  const deleteFavProgram = async (programId, userId) => {
+    await fetch(`/api/v1/favorites/deletefavprogram/${programId}/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    getUserFavProgram(userId);
   };
 
   const values = {
