@@ -53,7 +53,7 @@ const FavLoggedIn = () => {
       filterPrograms();
     }
     // eslint-disable-next-line
-  }, [userFavProgram]); /* userFavChannel*/
+  }, [userFavProgram, userFavChannel]); /* userFavChannel*/
 
   const filterChannels = () => {
     const favChannelIds = userFavChannel.map((fc) => fc.channelId);
