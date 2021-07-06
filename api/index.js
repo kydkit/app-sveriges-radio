@@ -40,10 +40,11 @@ app.use("/api/v1/favorites", favoritesRoutes);
 // Serve static files, makes the frontend files "available" to the backend
 app.use(express.static(path.join(__dirname, "../build")));
 
-app.listen(3001, (err) => {
+//process.env.PORT is set up for heroku's port. || 3001 is when we want to test locally
+app.listen(process.env.PORT || 3001, (err) => {
   if(err){
     console.log("The server could not start");
     console.log(err);
   }
-  console.log("listening on port: 3001");
+  console.log("server has started");
 }); 
