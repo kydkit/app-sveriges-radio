@@ -38,7 +38,7 @@ const RadioProvider = (props) => {
   const getChannelById = async (channelId) => {
     let channelsId = await fetch(`/api/v1/channels/${channelId}`);
     channelsId = await channelsId.json();
-    // console.log(channelsId.channel);
+    console.log(channelsId.channel);
     setChannelOnPage(channelsId.channel);
   };
 
